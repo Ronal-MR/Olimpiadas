@@ -25,16 +25,19 @@
     <h1>Lista de participantes</h1>
     <div class="d-grid gap-2 d-md-block">
       <button type="button" class="btn btn-info m-1" onclick="abrirForm(0)">Nuevo</button>
-      <button type="button" class="btn btn-primary m-1" onclick="listar()">Buscar</button>
+      <button type="button" class="btn btn-primary m-1" onclick="listarAtletas()">Buscar</button>
       <table class="table table-bordered" id="tablaParticipantes">
         <thead>
           <tr>
             <td>Id</td>
             <td>Nombre</td>
-            <td>Pais</td>
-            <td>Categoria</td>
-            <td>Deporte</th>
+            <td>Edad</td>
+            <td>Estatura</td>
+            <td>Peso</th>
             <td>Genero</td>
+            <td>idpais</td>
+            <td>idcategoria</td>
+            <td>iddeporte</td>
             <td>Acciones</td>
           </tr>
         </thead>
@@ -52,32 +55,42 @@
           var tablaParticipantes = [];
         }
 
-    listar();    
-    
-    function listar(){
-      console.log("INGRESANDO A LISTAR...");
+    listarAtletas();    
+      document.addEventListener("DOMContentLoaded", () => {
+        const tabla = document.querySelector("#tablaParticipantes")
+        const cuerpoTabla = document.querySelector("tbody")
 
-      var dataFila = '';
+      function listarAtletas(){
+        const parametros = new URLSearchParams();
+        parametros.append("op","listarAtletas");
 
-      if(tablaParticipantes.length > 0){
-        for(const i in tablaParticipantes){
-          var varParticipante = JSON.parse(tablaParticipantes[i]);
-          dataFila += "<tr>";
-          dataFila += "<td>"+varParticipante.idParticipante+"</td>";
-          dataFila += "<td>"+varParticipante.nombre+"</td>";
-          dataFila += "<td>"+varParticipante.pais+"</td>";
-          dataFila += "<td>"+varParticipante.categoria+"</td>";
-          dataFila += "<td>"+varParticipante.deporte+"</td>";
-          dataFila += "<td>"+varParticipante.genero+"</td>";
-          dataFila += "<td>"+
-                      "<button type='button' class='btn btn-warning' onclick='abrirForm("+varParticipante.idParticipante+")'>Editar</button>"+
-                      "</td>";
-          dataFila += "</tr>";
+        console.log("INGRESANDO A LISTAR...");
+
+        var dataFila = '';
+
+        if(tablaParticipantes.length > 0){
+          for(const i in tablaParticipantes){
+            var varParticipante = JSON.parse(tablaParticipantes[i]);
+            dataFila += "<tr>";
+            dataFila += "<td>"+varParticipante.idParticipante+"</td>";
+            dataFila += "<td>"+varParticipante.nombre+"</td>";
+            dataFila += "<td>"+varParticipante.edad+"</td>";
+            dataFila += "<td>"+varParticipante.estatura+"</td>";
+            dataFila += "<td>"+varParticipante.peso+"</td>";
+            dataFila += "<td>"+varParticipante.genero+"</td>";
+            dataFila += "<td>"+varParticipante.idpais+"</td>";
+            dataFila += "<td>"+varParticipante.idcategoria+"</td>";
+            dataFila += "<td>"+varParticipante.iddeporte+"</td>";
+            dataFila += "<td>"+
+                        "<button type='button' class='btn btn-warning' onclick='abrirForm("+varParticipante.idParticipante+")'>Editar</button>"+
+                        "</td>";
+            dataFila += "</tr>";
+          }
+          document.getElementById("dataParticipante").innerHTML = dataFila;
         }
-        document.getElementById("dataParticipante").innerHTML = dataFila;
       }
-    }
-
+       
+    })
     function abrirForm(idForm){
       localStorage.setItem("idForm", JSON.stringify(idForm));
       window.location.replace("../view/participante.form.html")

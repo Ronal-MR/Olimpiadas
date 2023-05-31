@@ -4,7 +4,7 @@
 require_once 'Conexion.php';
 
 
-class Plato extends Conexion{
+class Atleta extends Conexion{
 
   //Almacena la conexion
   private $conexion;
@@ -15,9 +15,9 @@ class Plato extends Conexion{
     $this->conexion = parent::getConexion();
   }
 
-  public function listarPlatos(){
+  public function listarAtletas(){
     try{
-      $consulta = $this->conexion->prepare("SELECT * FROM platos ORDER BY idplato");
+      $consulta = $this->conexion->prepare("SELECT * FROM Atleta ORDER BY idatleta");
       $consulta->execute();
 
       $tabla = $consulta->fetchAll(PDO::FETCH_ASSOC);
@@ -28,19 +28,24 @@ class Plato extends Conexion{
     }
   } //Fin de listar platos
 
-  public function registrarPlato($datosPlatos=[]){
+  public function registrarAtletas($datosAtletas=[]){
 
       $respuesta=[
         "status" => false,
         "message" => ""
       ];
       try{
-        $consulta = $this->conexion->prepare("INSERT INTO platos (tipo, nombreplato, precio) VALUES (?,?,?)");
+        $consulta = $this->conexion->prepare("CALL spu_Insertar_Atleta(?,?,?,?,?,?,?,?)");
         $respuesta ["status"] = $consulta->execute(array(
 
-          $datosPlatos['tipo'],
-          $datosPlatos['nombreplato'],
-          $datosPlatos['precio']
+          $datosAtletas['nombreatleta'],
+          $datosAtletas['edad'],
+          $datosAtletas['estatura'],
+          $datosAtletas['peso'],
+          $datosAtletas['genero'],
+          $datosAtletas['idpais'],
+          $datosAtletas['idcategoria'],
+          $datosAtletas['iddeporte']
         ));
       }catch(Exception $e) {
         $respuesta["message"] = "No se pudo completar el proceso de registro. Codigo de error".$e->getMessage();

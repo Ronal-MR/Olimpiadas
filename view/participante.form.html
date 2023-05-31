@@ -31,7 +31,7 @@
       <div class="card-body">
         <form id="frmParticipante">
           <div class="form-group">
-            <label for="txtIdParticipante">IDParticipante</label>
+            <label for="txtIdParticipante">ID</label>
             <input type="text" class="form-control" id="txtIdParticipante" value="0" readonly>
           </div>
           <div class="form-group">
@@ -39,23 +39,32 @@
             <input type="text" class="form-control" id="txtNombre">
           </div>
           <div class="form-group">
-            <label for="txtPais">Pais</label>
-            <input type="text" class="form-control" id="txtPais">
+            <label for="txtEdad">Edad</label>
+            <input type="text" class="form-control" id="txtEdad">
           </div>
           <div class="form-group">
-            <label for="txtCategoria">Categoria</label>
-            <input type="text" class="form-control" id="txtCategoria">
+            <label for="txtEstatura">Estatura</label>
+            <input type="text" class="form-control" id="txtEstatura">
           </div>
           <div class="form-group">
-            <label for="txtDeporte">Deporte</label>
-            <input type="text" class="form-control" id="txtDeporte">
+            <label for="txtPeso">Peso</label>
+            <input type="text" class="form-control" id="txtPeso">
           </div>
           <div class="form-group">
-            <label for="genero">Genero</label>
-            <select class="form-control" id="genero">
-              <option value="">Femenino</option>
-              <option value="">Masculino</option>
-            </select>
+            <label for="txtGenero">Genero</label>
+            <input type="text" class="form-control" id="txtGenero">
+          </div>
+          <div class="form-group">
+            <label for="txtIdPais">IDPais</label>
+            <input type="text" class="form-control" id="txtIdPais">
+          </div>
+          <div class="form-group">
+            <label for="txtIdCategoria">IDCategoria</label>
+            <input type="text" class="form-control" id="txtIdCategoria">
+          </div>
+          <div class="form-group">
+            <label for="txtIdDeporte">IDDeporte</label>
+            <input type="text" class="form-control" id="txtIdDeporte">
           </div>
         </form>
       </div>
@@ -82,7 +91,7 @@
     }
 
     cargarPagina();
- 
+   
     function guardar() {
 
       Swal.fire({
@@ -98,10 +107,13 @@
             var objParticipante = JSON.stringify({
               idParticipante: (idForm > 0) ? idForm : (tablaParticipantes.length + 1),
               nombre: document.getElementById("txtNombre").value,
-              pais: document.getElementById("txtPais").value,
-              categoria: document.getElementById("txtCategoria").value,
-              deporte: document.getElementById("txtDeporte").value,
-              genero: document.getElementById("genero").value
+              edad: document.getElementById("txtEdad").value,
+              estatura: document.getElementById("txtEstatura").value,
+              peso: document.getElementById("txtPeso").value,
+              genero: document.getElementById("txtGenero").value,
+              idpais: document.getElementById("txtIdPais").value,
+              idcategoria: document.getElementById("txtIdCategoria").value,
+              iddeporte: document.getElementById("txtIdDeporte").value
             });
             console.log(objParticipante);
             //Editar
@@ -144,10 +156,13 @@
           if (varParticipante.idParticipante == idForm) {
             document.getElementById("txtIdParticipante").value = varParticipante.idParticipante;
             document.getElementById("txtNombre").value = varParticipante.nombre;
-            document.getElementById("txtPais").value = varParticipante.pais;
-            document.getElementById("txtCategoria").value = varParticipante.categoria;
-            document.getElementById("txtDeporte").value = varParticipante.deporte;
-            document.getElementById("genero").value = varParticipante.genero;
+            document.getElementById("txtEdad").value = varParticipante.edad;
+            document.getElementById("txtEstatura").value = varParticipante.estatura;
+            document.getElementById("txtPeso").value = varParticipante.peso;
+            document.getElementById("txtGenero").value = varParticipante.genero;
+            document.getElementById("txtIdPais").value = varParticipante.idpais;
+            document.getElementById("txtIdCategoria").value = varParticipante.idcategoria;
+            document.getElementById("txtIdDeporte").value = varParticipante.iddeporte;
             break;
           }
         }
